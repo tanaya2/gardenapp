@@ -29,6 +29,10 @@ $(document).ready(function () {
             //function to get location name
             getLocationName(latlongName);
 
+            //do I need this here?? or somewhere in the get document ready
+            //BEN: Yep you defnitely need it here or it won't execute at all
+            getPlantData();
+
         }
 
         function error(err) {
@@ -38,9 +42,10 @@ $(document).ready(function () {
             var defaultLocation = '-35.28346,149.12807';
 
             getWeatherData(newLocation);
-            
-           //do I need this here?? or somewhere in the get document ready
-            getPlantData;
+
+            //do I need this here?? or somewhere in the get document ready
+            //BEN: yes here so that it executes even if there is an error and also on line 34
+            getPlantData();
         }
 
         //this is the line that triggers the browser prompt
@@ -89,26 +94,53 @@ function getWeatherData(currentLocation) {
         console.log(data);
 
 
-    }); 
+    });
 }
 
 //this function will load data from trefle api
-function getPlantData {
+function getPlantData() {
+
+    //API format is:
+    // https://trefle.io/some-url?token=YOUR-TOKEN
+
+    //good guide here:
+    //https://www.ilovefreesoftware.com/11/programming/free-plants-database-api-get-scientific-data-plants.html
 
     //my secret key
-    var key = 'TG1KU002aW9LNWU2WGRpYm5YbGlyQT09';
+    var trefleKey = 'TG1KU002aW9LNWU2WGRpYm5YbGlyQT09';
 
+    //BEN: 
+    //rather than having to authenticate yourself (complicated), you can use this service to solve all your problems
+    //details here: https://github.com/Rob--W/cors-anywhere/#documentation 
+    //the gist is that you add the url before you make the call
+    var cors = 'https://cors-anywhere.herokuapp.com/'
 
     //api call
-    var url = 'https://trefle.io' + key + '/'; 
-    console.log(url);
+    //BEN: this won't work because the API format is very specific. 
+    //    var url = 'https://trefle.io/' + trefleKey + '/api/plants';
 
-    $.getJSON(url, function (data) {
+    //but, if you change the order, this will work
+    var urlAll = cors + 'https://trefle.io/api/plants?&token=' + trefleKey;
+
+    $.getJSON(urlAll, function (data) {
+        console.log('returning all data');
+        //BEN: return all records
         console.log(data);
 
 
     }); //close getJSON
+
+
+    //BEN: this will return plants based off a search
+    var query = 'rosemary';
+    var urlSearch = cors + 'https://trefle.io/api/plants?q=' + query + '&token=' + trefleKey;
+
+    $.getJSON(urlSearch, function (data) {
+        console.log('returning data from search')
+        //BEN: return all records
+        console.log(data);
+
+        //BEN: return the first item
+        console.log(data[0])
+    }); //close getJSON
 }
-
-
-
