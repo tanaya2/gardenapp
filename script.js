@@ -29,8 +29,7 @@ $(document).ready(function () {
             //function to get location name
             getLocationName(latlongName);
 
-            //do I need this here?? or somewhere in the get document ready
-            //BEN: Yep you defnitely need it here or it won't execute at all
+            //function to get plant data
             getPlantData();
 
         }
@@ -43,8 +42,7 @@ $(document).ready(function () {
 
             getWeatherData(newLocation);
 
-            //do I need this here?? or somewhere in the get document ready
-            //BEN: yes here so that it executes even if there is an error and also on line 34
+            //get plant data even if error
             getPlantData();
         }
 
@@ -93,7 +91,6 @@ function getWeatherData(currentLocation) {
     $.getJSON(url, function (data) {
         console.log(data);
 
-
     });
 }
 
@@ -116,31 +113,90 @@ function getPlantData() {
     var cors = 'https://cors-anywhere.herokuapp.com/'
 
     //api call
-    //BEN: this won't work because the API format is very specific. 
-    //    var url = 'https://trefle.io/' + trefleKey + '/api/plants';
 
-    //but, if you change the order, this will work
+    //find all kingdoms
+    var urlAll = cors + 'https://trefle.io/api/kingdoms?&token=' + trefleKey;
+
+    $.getJSON(urlAll, function (data) {
+        console.log('returning all data');
+        //BEN: return all records
+        console.log(data);
+        
+        })
+    
+    //find all subkingdoms
+    var urlAll = cors + 'https://trefle.io/api/subkingdoms?&token=' + trefleKey;
+
+    $.getJSON(urlAll, function (data) {
+        console.log('returning all data');
+        //BEN: return all records
+        console.log(data);
+        
+        })
+    
+    //find all divisions
+    var urlAll = cors + 'https://trefle.io/api/divisions?&token=' + trefleKey;
+
+    $.getJSON(urlAll, function (data) {
+        console.log('returning all data');
+        //BEN: return all records
+        console.log(data);
+        
+        })
+    
+    //find all families
+    var urlAll = cors + 'https://trefle.io/api/families?&token=' + trefleKey;
+
+    $.getJSON(urlAll, function (data) {
+        console.log('returning all data');
+        //BEN: return all records
+        console.log(data);
+        
+        })
+    //find all genuses
+    var urlAll = cors + 'https://trefle.io/api/genuses?&token=' + trefleKey;
+
+    $.getJSON(urlAll, function (data) {
+        console.log('returning all data');
+        //BEN: return all records
+        console.log(data);
+        
+        })
+    
+    //find all plants
     var urlAll = cors + 'https://trefle.io/api/plants?&token=' + trefleKey;
 
     $.getJSON(urlAll, function (data) {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
+        
+   //find all species
+    var urlAll = cors + 'https://trefle.io/api/species?&token=' + trefleKey;
 
-
+    $.getJSON(urlAll, function (data) {
+        console.log('returning all data');
+        //BEN: return all records
+        console.log(data);
+        
+        })
+        
     }); //close getJSON
 
 
     //BEN: this will return plants based off a search
     var query = 'rosemary';
     var urlSearch = cors + 'https://trefle.io/api/plants?q=' + query + '&token=' + trefleKey;
+  
 
-    $.getJSON(urlSearch, function (data) {
-        console.log('returning data from search')
+   $.getJSON(urlSearch, function (data) {
+       console.log('returning data from search')
         //BEN: return all records
-        console.log(data);
+       console.log(data);
 
         //BEN: return the first item
-        console.log(data[0])
-    }); //close getJSON
-}
+       console.log(data[0])
+        
+       })
+    
+} //close getJSON
