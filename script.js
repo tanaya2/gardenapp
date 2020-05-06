@@ -23,9 +23,6 @@ $(document).ready(function () {
 
             console.log(newLocation);
 
-            //run function to get weather data from api
-            getWeatherData(newLocation);
-
             //function to get location name
             getLocationName(latlongName);
 
@@ -39,8 +36,6 @@ $(document).ready(function () {
 
             //set default location - canberra
             var defaultLocation = '-35.28346,149.12807';
-
-            getWeatherData(newLocation);
 
             //get plant data even if error
             getPlantData();
@@ -77,22 +72,6 @@ function getLocationName(latlngCoords) {
 
 };
 
-//this function will load data from darksky api
-function getWeatherData(currentLocation) {
-
-    //my secret key
-    var key = '80fa44f25c6d60fb504e7a003ddd88ad';
-
-
-    //api call
-    var url = 'https://api.darksky.net/forecast/' + key + '/' + currentLocation + '?units=auto&callback=?';
-    console.log(url);
-
-    $.getJSON(url, function (data) {
-        console.log(data);
-
-    });
-}
 
 //this function will load data from trefle api
 function getPlantData() {
@@ -200,3 +179,4 @@ function getPlantData() {
        })
     
 } //close getJSON
+
