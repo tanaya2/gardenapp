@@ -46,7 +46,18 @@ $(document).ready(function () {
 
     }
 
+    $(".searchBtn").click(function () {
+        //ben: get text from search query
+        var query = $("input:text").val();
+        console.log(query);
+
+        //run function with query
+        getPlantData(query);
+    });
+
 }); //close document ready
+
+
 
 //get location name
 
@@ -74,7 +85,7 @@ function getLocationName(latlngCoords) {
 
 
 //this function will load data from trefle api
-function getPlantData() {
+function getPlantData(searchQuery) {
 
     //API format is:
     // https://trefle.io/some-url?token=YOUR-TOKEN
@@ -100,9 +111,9 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
-    
+
+    })
+
     //find all subkingdoms
     var urlAll = cors + 'https://trefle.io/api/subkingdoms?&token=' + trefleKey;
 
@@ -110,9 +121,9 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
-    
+
+    })
+
     //find all divisions
     var urlAll = cors + 'https://trefle.io/api/divisions?&token=' + trefleKey;
 
@@ -120,9 +131,9 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
-    
+
+    })
+
     //find all families
     var urlAll = cors + 'https://trefle.io/api/families?&token=' + trefleKey;
 
@@ -130,8 +141,8 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
+
+    })
     //find all genuses
     var urlAll = cors + 'https://trefle.io/api/genuses?&token=' + trefleKey;
 
@@ -139,9 +150,9 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
-    
+
+    })
+
     //find all plants
     var urlAll = cors + 'https://trefle.io/api/plants?&token=' + trefleKey;
 
@@ -149,34 +160,33 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-   //find all species
-    var urlAll = cors + 'https://trefle.io/api/species?&token=' + trefleKey;
 
-    $.getJSON(urlAll, function (data) {
-        console.log('returning all data');
-        //BEN: return all records
-        console.log(data);
-        
+        //find all species
+        var urlAll = cors + 'https://trefle.io/api/species?&token=' + trefleKey;
+
+        $.getJSON(urlAll, function (data) {
+            console.log('returning all data');
+            //BEN: return all records
+            console.log(data);
+
         })
-        
+
     }); //close getJSON
 
 
     //BEN: this will return plants based off a search
-    var query = 'rosemary';
+    var query = searchQuery;
     var urlSearch = cors + 'https://trefle.io/api/plants?q=' + query + '&token=' + trefleKey;
-  
 
-   $.getJSON(urlSearch, function (data) {
-       console.log('returning data from search')
+
+    $.getJSON(urlSearch, function (data) {
+        console.log('returning data from search')
         //BEN: return all records
-       console.log(data);
+        console.log(data);
 
         //BEN: return the first item
-       console.log(data[0])
-        
-       })
-    
-} //close getJSON
+        console.log(data[0])
 
+    })
+
+} //close getJSON
