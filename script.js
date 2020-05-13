@@ -26,8 +26,22 @@ $(document).ready(function () {
             //function to get location name
             getLocationName(latlongName);
 
+
+            // get the month from ther user
+            // this will be from 0-11
+            var userMonth = new Date().getMonth();
+
+            //use the date to go get the current season
+            // becuase this is based off the date, we don't need to check the hemisphere
+            var season = getSeason(userMonth);
+
+            console.log('season is: ' + season);
+
+            getPlants(season);
+
+
             //function to get plant data
-            getPlantData();
+            //getPlantData();
 
         }
 
@@ -38,7 +52,7 @@ $(document).ready(function () {
             var defaultLocation = '-35.28346,149.12807';
 
             //get plant data even if error
-            getPlantData();
+            //getPlantData();
         }
 
         //this is the line that triggers the browser prompt
@@ -46,7 +60,132 @@ $(document).ready(function () {
 
     }
 
+    $(".searchBtn").click(function () {
+        //ben: get text from search query
+        var query = $("input:text").val();
+        console.log(query);
+
+        //run function with query
+        //getPlantData(query);
+    });
+
 }); //close document ready
+
+//function to get season, this will return what season it is based off the date
+// adapted from here: https://gist.github.com/jossef/d904cd0838304b0e6c01
+function getSeason(month) {
+
+    if (3 <= month <= 5) {
+        return 'autumn';
+    }
+
+    if (6 <= month <= 8) {
+        return 'winter';
+    }
+
+    if (9 <= month <= 11) {
+        return 'spring';
+    }
+
+    // Months 12, 01, 02
+    return 'summer';
+}
+
+//now let's get the plant data from our arrays
+function getPlants(season) {
+    console.log('getting plants for season: ' + season);
+
+    //BEN: create an object (to set up our own data structure)
+    var obj = {}
+
+    //our arrays of plants
+
+    //add more!
+    var autumnArray = [
+    'cabbage',
+    'brussel sprouts'
+];
+
+    //same sam or different
+    var winterArray = [
+    'cabbage',
+    'brussel sprouts'
+];
+
+    if (season == 'autumn') {
+        console.log(autumnArray);
+
+        plants = autumnArray;
+
+    } else if (season == 'winter') {
+
+        plants = winterArray;
+    } //and so on 
+
+    //now go get data for each plant from somewhere
+    plants.forEach(function (singlePlant) {
+
+        var container = $('<div>');
+
+        //search request from wikipedia
+        var wikiURL = "http://en.wikipedia.org/w/api.php?action=query&list=search&srprop&srsearch=" + singlePlant + "&prop=extracts&format=json" + "&origin=*";
+
+        //this gets a list of search results from wikipedia
+        $.getJSON(wikiURL, function (wikiData) {
+            //if you look in the results, it looks like the first item is the one we want
+            console.log(wikiData.query.search);
+
+            //we need the page ID
+            var wikiPageId = wikiData.query.search[0].pageid;
+
+            //var for title
+            var wikiPageTitle = wikiData.query.search[0].title;
+
+            //add it to the page
+            container.append('<h1>Name: ' + wikiPageTitle + '</h1>');
+
+            //but to use it we need to actually get the page info
+            //so another call is needed
+
+            //https://www.mediawiki.org/wiki/API:Get_the_contents_of_a_page
+            var wikiInfoBox = "https://en.wikipedia.org/w/api.php?action=parse&pageid=" + wikiPageId + "&section=0&prop=wikitext&format=json" + "&origin=*";
+
+            //not sure if it returns the kind of info you want...
+            $.getJSON(wikiInfoBox, function (wikiInfoData) {
+                console.log(wikiInfoData);
+
+                // you could do other jqueyr add to page stuff here
+                //container.append('<p>'+other stuff+'</p>');
+
+            }); //close wiki info call
+
+            //need another call to get the image too!
+            var wikiImageURL = "http://en.wikipedia.org/w/api.php?action=query&pageids=" + wikiPageId + "&prop=pageimages&format=json" + "&pithumbsize=500&origin=*";
+
+            //get the image from wikipedia
+            $.getJSON(wikiImageURL, function (imageData) {
+
+                var wikiImage = imageData.query.pages[wikiPageId].thumbnail.source;
+                //this is our image
+                console.log(wikiImage);
+
+                //now set image
+                //https://api.jquery.com/attr/
+                container.append('<img width="250" src="' + wikiImage + '"></img>');
+
+            }); //close image call
+
+
+            //now append the containers to the page
+            $('body').append(container);
+
+
+        }); //close main data call
+
+    }); //close foreach
+
+}
+
 
 //get location name
 
@@ -74,7 +213,7 @@ function getLocationName(latlngCoords) {
 
 
 //this function will load data from trefle api
-function getPlantData() {
+function getPlantData(searchQuery) {
 
     //API format is:
     // https://trefle.io/some-url?token=YOUR-TOKEN
@@ -100,9 +239,9 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
-    
+
+    })
+
     //find all subkingdoms
     var urlAll = cors + 'https://trefle.io/api/subkingdoms?&token=' + trefleKey;
 
@@ -110,9 +249,9 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
-    
+
+    })
+
     //find all divisions
     var urlAll = cors + 'https://trefle.io/api/divisions?&token=' + trefleKey;
 
@@ -120,9 +259,9 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
-    
+
+    })
+
     //find all families
     var urlAll = cors + 'https://trefle.io/api/families?&token=' + trefleKey;
 
@@ -130,8 +269,8 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
+
+    })
     //find all genuses
     var urlAll = cors + 'https://trefle.io/api/genuses?&token=' + trefleKey;
 
@@ -139,9 +278,9 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-        })
-    
+
+    })
+
     //find all plants
     var urlAll = cors + 'https://trefle.io/api/plants?&token=' + trefleKey;
 
@@ -149,34 +288,33 @@ function getPlantData() {
         console.log('returning all data');
         //BEN: return all records
         console.log(data);
-        
-   //find all species
-    var urlAll = cors + 'https://trefle.io/api/species?&token=' + trefleKey;
 
-    $.getJSON(urlAll, function (data) {
-        console.log('returning all data');
-        //BEN: return all records
-        console.log(data);
-        
+        //find all species
+        var urlAll = cors + 'https://trefle.io/api/species?&token=' + trefleKey;
+
+        $.getJSON(urlAll, function (data) {
+            console.log('returning all data');
+            //BEN: return all records
+            console.log(data);
+
         })
-        
+
     }); //close getJSON
 
 
     //BEN: this will return plants based off a search
-    var query = 'rosemary';
+    var query = searchQuery;
     var urlSearch = cors + 'https://trefle.io/api/plants?q=' + query + '&token=' + trefleKey;
-  
 
-   $.getJSON(urlSearch, function (data) {
-       console.log('returning data from search')
+
+    $.getJSON(urlSearch, function (data) {
+        console.log('returning data from search')
         //BEN: return all records
-       console.log(data);
+        console.log(data);
 
         //BEN: return the first item
-       console.log(data[0])
-        
-       })
-    
-} //close getJSON
+        console.log(data[0])
 
+    })
+
+} //close getJSON
