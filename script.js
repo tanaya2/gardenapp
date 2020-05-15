@@ -39,9 +39,8 @@ $(document).ready(function () {
 
             getPlants(season);
 
-
             //function to get plant data
-            //getPlantData();
+            getPlantData();
 
         }
 
@@ -50,9 +49,11 @@ $(document).ready(function () {
 
             //set default location - canberra
             var defaultLocation = '-35.28346,149.12807';
+            
 
             //get plant data even if error
-            //getPlantData();
+            getPlantData();
+            
         }
 
         //this is the line that triggers the browser prompt
@@ -100,27 +101,33 @@ function getPlants(season) {
 
     //our arrays of plants
 
-    //add more!
+    //autumn plants
     var autumnArray = [
-    'cabbage',
-    'brussel sprouts'
+    'potato',
+    'garlic'
+   // 'mint'
 ];
 
-    //same sam or different
+    //winter plants
     var winterArray = [
-    'cabbage',
-    'brussel sprouts'
+    'capsicum',
+    'chili'
+  //  'strawberry'
 ];
-
-    if (season == 'autumn') {
-        console.log(autumnArray);
-
-        plants = autumnArray;
-
-    } else if (season == 'winter') {
-
-        plants = winterArray;
-    } //and so on 
+    
+    //spring plants
+    var springArray = [
+    'carrot',
+    'broccoli'
+   // 'tomato'
+];
+    
+    //summer plants
+    var summerArray = [
+    'eggplant',
+    'beans'
+//    'corn'
+];
 
     //now go get data for each plant from somewhere
     plants.forEach(function (singlePlant) {
