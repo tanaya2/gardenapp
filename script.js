@@ -104,30 +104,49 @@ function getPlants(season) {
     //autumn plants
     var autumnArray = [
     'potato',
-    'garlic'
-   // 'mint'
+    'garlic',
+    'mint'
 ];
 
     //winter plants
     var winterArray = [
     'capsicum',
-    'chili'
-  //  'strawberry'
+    'chili',
+    'strawberry'
 ];
     
     //spring plants
     var springArray = [
     'carrot',
-    'broccoli'
-   // 'tomato'
+    'broccoli',
+    'tomato'
 ];
     
     //summer plants
     var summerArray = [
     'eggplant',
-    'beans'
-//    'corn'
+    'beans',
+    'corn'
 ];
+    // if statement to check the season and add the right plants array to the data object
+
+    if (season == 'autumn') {
+
+        plants = autumnArray;
+
+    } else if (season == 'winter') {
+
+        plants = winterArray;
+
+    } else if (season == 'spring') {
+
+        plants = springArray;
+
+    } else {
+
+        plants = summerArray;
+
+    }
 
     //now go get data for each plant from somewhere
     plants.forEach(function (singlePlant) {
@@ -149,8 +168,19 @@ function getPlants(season) {
             var wikiPageTitle = wikiData.query.search[0].title;
 
             //add it to the page
-            container.append('<h1>Name: ' + wikiPageTitle + '</h1>');
-
+            container.append('<h4> ' + wikiPageTitle + '</h4>');
+            
+           //is it possible to use if statements to link to the correct .html file?
+            if (wikiPageTitle == 'mint') {
+                
+                HTMLLinkElement = str.link("mint.html");
+                
+            } else if (wikiPageTitle == 'garlic') {
+                
+                HTMLDocument = str.link("garlic.html");
+            }
+            
+                         
             //but to use it we need to actually get the page info
             //so another call is needed
 
@@ -160,27 +190,13 @@ function getPlants(season) {
             //not sure if it returns the kind of info you want...
             $.getJSON(wikiInfoBox, function (wikiInfoData) {
                 console.log(wikiInfoData);
+                
+          //  container.append('<h1>Description: ' + wikiInfoBox + '</h1>');
 
                 // you could do other jqueyr add to page stuff here
-                //container.append('<p>'+other stuff+'</p>');
+              //  container.append('<p>'+other stuff+'</p>');
 
             }); //close wiki info call
-
-            //need another call to get the image too!
-            var wikiImageURL = "http://en.wikipedia.org/w/api.php?action=query&pageids=" + wikiPageId + "&prop=pageimages&format=json" + "&pithumbsize=500&origin=*";
-
-            //get the image from wikipedia
-            $.getJSON(wikiImageURL, function (imageData) {
-
-                var wikiImage = imageData.query.pages[wikiPageId].thumbnail.source;
-                //this is our image
-                console.log(wikiImage);
-
-                //now set image
-                //https://api.jquery.com/attr/
-                container.append('<img width="250" src="' + wikiImage + '"></img>');
-
-            }); //close image call
 
 
             //now append the containers to the page
@@ -217,8 +233,6 @@ function getLocationName(latlngCoords) {
     });
 
 };
-
-
 //this function will load data from trefle api
 function getPlantData(searchQuery) {
 
@@ -323,5 +337,18 @@ function getPlantData(searchQuery) {
         console.log(data[0])
 
     })
+    
+        //BEN: this will return plants based off a search
+    var query = 'potato';
+    var urlSearch = cors + 'https://trefle.io/api/plants?q=' + query + '&token=' + trefleKey;
+
+    $.getJSON(urlSearch, function (data) {
+        console.log('returning data from search')
+        //BEN: return all records
+        console.log(data);
+
+        //BEN: return the first item
+        console.log(data[0])
+    }); //close getJSON
 
 } //close getJSON
