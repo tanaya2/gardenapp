@@ -401,6 +401,12 @@ body.home {
     background: linear-gradient(180deg, #e5e5e5 50%, #254434 50%);
 }
 
+body.home @media (min-width: 500px) {
+    .element {
+        background: #e5e5e5;
+    }
+}
+
 body {
     padding-top: 2%;
     padding-left:2%;
@@ -410,6 +416,13 @@ body {
     background: linear-gradient(angle, color-stop, color-stop);
     background: linear-gradient(90deg, #e5e5e5 50%, #254434 50%); 
 }
+
+body @media (min-width: 500px) {
+    .element{
+        background: #254434;
+    }
+}
+
 
 /* Header */
 
