@@ -26,13 +26,11 @@ $(document).ready(function () {
             //function to get location name
             getLocationName(latlongName);
 
-
             // get the month from ther user
             // this will be from 0-11
             var userMonth = new Date().getMonth();
 
             //use the date to go get the current season
-            // becuase this is based off the date, we don't need to check the hemisphere
             var season = getSeason(userMonth);
 
             console.log('season is: ' + season);
@@ -41,7 +39,6 @@ $(document).ready(function () {
 
             //function to get plant data
             getPlantData();
-
         }
 
         function error(err) {
@@ -50,7 +47,6 @@ $(document).ready(function () {
             //set default location - canberra
             var defaultLocation = '-35.28346,149.12807';
             
-
             //get plant data even if error
             getPlantData();
             
@@ -59,21 +55,11 @@ $(document).ready(function () {
         //this is the line that triggers the browser prompt
         navigator.geolocation.getCurrentPosition(success, error);
 
-    }
-
-    $(".searchBtn").click(function () {
-        //ben: get text from search query
-        var query = $("input:text").val();
-        console.log(query);
-
-        //run function with query
-        //getPlantData(query);
-    });
+    };
 
 }); //close document ready
 
 //function to get season, this will return what season it is based off the date
-// adapted from here: https://gist.github.com/jossef/d904cd0838304b0e6c01
 function getSeason(month) {
 
     if (3 <= month <= 5) {
@@ -92,14 +78,14 @@ function getSeason(month) {
     return 'summer';
 }
 
-//now let's get the plant data from our arrays
+//get plant data from arrays
 function getPlants(season) {
     console.log('getting plants for season: ' + season);
 
-    //BEN: create an object (to set up our own data structure)
+    //create an object
     var obj = {}
 
-    //our arrays of plants
+    //arrays of plants
 
     //autumn plants
     var autumnArray = [
@@ -158,10 +144,9 @@ function getPlants(season) {
 
         //this gets a list of search results from wikipedia
         $.getJSON(wikiURL, function (wikiData) {
-            //if you look in the results, it looks like the first item is the one we want
             console.log(wikiData.query.search);
 
-            //we need the page ID
+            //get page ID
             var wikiPageId = wikiData.query.search[0].pageid;
 
             //var for title
@@ -170,33 +155,30 @@ function getPlants(season) {
             //add it to the page
             container.append('<h4> ' + wikiPageTitle + '</h4>');
             
-           //is it possible to use if statements to link to the correct .html file?
-            if (wikiPageTitle == 'mint') {
-                
-                HTMLLinkElement = str.link("mint.html");
-                
-            } else if (wikiPageTitle == 'garlic') {
-                
-                HTMLDocument = str.link("garlic.html");
-            }
             
-                         
-            //but to use it we need to actually get the page info
-            //so another call is needed
+            /*attempt to add icons for title results
+            var title = $("<h2>").html("Plant: " + data.title);
+                $("title").append(title);
+            
+            var iconImage = returnIcon(data.title.icon);
+            var currentIcon = $('<div>').html('img src"' + iconImage + '">').addClass('icon');
+                $("title").append(currentIcon);
+            
+            another attempt to add icons for title results
+            var icon = 'getPlants.icon';
+            var iconImage = returnIcon(data.getPlants.icon);
+            var currentIcon = $('.icons').html('<img src="' + iconImage + '">');*/
 
+            /* wiki description data not needed for this page. call to get contents of the wiki page
             //https://www.mediawiki.org/wiki/API:Get_the_contents_of_a_page
             var wikiInfoBox = "https://en.wikipedia.org/w/api.php?action=parse&pageid=" + wikiPageId + "&section=0&prop=wikitext&format=json" + "&origin=*";
-
-            //not sure if it returns the kind of info you want...
+            
             $.getJSON(wikiInfoBox, function (wikiInfoData) {
                 console.log(wikiInfoData);
                 
-          //  container.append('<h1>Description: ' + wikiInfoBox + '</h1>');
+           // container.append('<h1>Description: ' + wikiInfoBox + '</h1>');
 
-                // you could do other jqueyr add to page stuff here
-              //  container.append('<p>'+other stuff+'</p>');
-
-            }); //close wiki info call
+        }); //close wiki info call*/
 
 
             //now append the containers to the page
@@ -206,16 +188,12 @@ function getPlants(season) {
         }); //close main data call
 
     }); //close foreach
-
 }
 
-
 //get location name
-
 function getLocationName(latlngCoords) {
 
     var apiKey = 'c89f5a299176437ea002fecc8d8b544b';
-
     var geocodeUrl = 'http://api.opencagedata.com/geocode/v1/json?q=' + latlngCoords + '&key=' + apiKey;
 
     $.get(geocodeUrl, function (locationData) {
@@ -232,123 +210,54 @@ function getLocationName(latlngCoords) {
 
     });
 
-};
-//this function will load data from trefle api
-function getPlantData(searchQuery) {
+};  //close getJSON
 
-    //API format is:
-    // https://trefle.io/some-url?token=YOUR-TOKEN
+/*attempt tp get icon images for plant title data
+function to run in order to return icon image
+function returnIcon(icon) {
 
-    //good guide here:
-    //https://www.ilovefreesoftware.com/11/programming/free-plants-database-api-get-scientific-data-plants.html
+    //setup icons
+    // find icon files
+    var beansIcon = 'images/beans.png';
+    var broccoliIcon = 'images/broccoli.png';
+    var capsicumIcon = 'images/capsicum.png';
+    var carrotIcon = 'images/carrot.png';
+    var chiliIcon = 'images/chili.png';
+    var cornIcon = 'images/corn.png';
+    var eggplantIcon = 'images/eggplant.png';
+    var garlicIcon = 'images/garlic.png';
+    var mintIcon = 'images/mint.png';
+    var potatoIcon = 'images/potato.png';
+    var strawberryIcon = 'images/strawberry.png';
+    var tomatoIcon = 'images/tomato.png';
 
-    //my secret key
-    var trefleKey = 'TG1KU002aW9LNWU2WGRpYm5YbGlyQT09';
-
-    //BEN: 
-    //rather than having to authenticate yourself (complicated), you can use this service to solve all your problems
-    //details here: https://github.com/Rob--W/cors-anywhere/#documentation 
-    //the gist is that you add the url before you make the call
-    var cors = 'https://cors-anywhere.herokuapp.com/'
-
-    //api call
-
-    //find all kingdoms
-    var urlAll = cors + 'https://trefle.io/api/kingdoms?&token=' + trefleKey;
-
-    $.getJSON(urlAll, function (data) {
-        console.log('returning all data');
-        //BEN: return all records
-        console.log(data);
-
-    })
-
-    //find all subkingdoms
-    var urlAll = cors + 'https://trefle.io/api/subkingdoms?&token=' + trefleKey;
-
-    $.getJSON(urlAll, function (data) {
-        console.log('returning all data');
-        //BEN: return all records
-        console.log(data);
-
-    })
-
-    //find all divisions
-    var urlAll = cors + 'https://trefle.io/api/divisions?&token=' + trefleKey;
-
-    $.getJSON(urlAll, function (data) {
-        console.log('returning all data');
-        //BEN: return all records
-        console.log(data);
-
-    })
-
-    //find all families
-    var urlAll = cors + 'https://trefle.io/api/families?&token=' + trefleKey;
-
-    $.getJSON(urlAll, function (data) {
-        console.log('returning all data');
-        //BEN: return all records
-        console.log(data);
-
-    })
-    //find all genuses
-    var urlAll = cors + 'https://trefle.io/api/genuses?&token=' + trefleKey;
-
-    $.getJSON(urlAll, function (data) {
-        console.log('returning all data');
-        //BEN: return all records
-        console.log(data);
-
-    })
-
-    //find all plants
-    var urlAll = cors + 'https://trefle.io/api/plants?&token=' + trefleKey;
-
-    $.getJSON(urlAll, function (data) {
-        console.log('returning all data');
-        //BEN: return all records
-        console.log(data);
-
-        //find all species
-        var urlAll = cors + 'https://trefle.io/api/species?&token=' + trefleKey;
-
-        $.getJSON(urlAll, function (data) {
-            console.log('returning all data');
-            //BEN: return all records
-            console.log(data);
-
-        })
-
-    }); //close getJSON
-
-
-    //BEN: this will return plants based off a search
-    var query = searchQuery;
-    var urlSearch = cors + 'https://trefle.io/api/plants?q=' + query + '&token=' + trefleKey;
-
-
-    $.getJSON(urlSearch, function (data) {
-        console.log('returning data from search')
-        //BEN: return all records
-        console.log(data);
-
-        //BEN: return the first item
-        console.log(data[0])
-
-    })
+    //if statement 
+    if (icon === 'beans') {
+        iconImage = beansIcon;
+    } else if (icon === 'broccoli') {
+        iconImage = broccoliIcon;
+    } else if (icon === 'capsicum') {
+        iconImage = capsicumIcon;
+    } else if (icon === 'carrot') {
+        iconImage = carrotIcon;
+    } else if (icon === 'chili') {
+        iconImage = chiliIcon;
+    } else if (icon === 'corn') {
+        iconImage = cornIcon;
+    } else if (icon === 'eggplant') {
+        iconImage = eggplantIcon;
+    } else if (icon === 'garlic') {
+        iconImage = garlicIcon;
+    } else if (icon === 'mint') {
+        iconImage = mintIcon;
+    } else if (icon === 'potato') {
+        iconImage = potatoIcon;
+    } else if (icon === 'strawberry') {
+        iconImage = strawberryIcon;
+    } else if (icon === 'tomato') {
+        iconImage = tomatoIcon;
+    }
     
-        //BEN: this will return plants based off a search
-    var query = 'potato';
-    var urlSearch = cors + 'https://trefle.io/api/plants?q=' + query + '&token=' + trefleKey;
-
-    $.getJSON(urlSearch, function (data) {
-        console.log('returning data from search')
-        //BEN: return all records
-        console.log(data);
-
-        //BEN: return the first item
-        console.log(data[0])
-    }); //close getJSON
-
-} //close getJSON
+    return iconImgae;
+    
+}*/
