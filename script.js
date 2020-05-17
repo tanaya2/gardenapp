@@ -194,7 +194,7 @@ function getPlants(season) {
 function getLocationName(latlngCoords) {
 
     var apiKey = 'c89f5a299176437ea002fecc8d8b544b';
-    var geocodeUrl = 'http://api.opencagedata.com/geocode/v1/json?q=' + latlngCoords + '&key=' + apiKey;
+    var geocodeUrl = 'https://api.opencagedata.com/geocode/v1/json?q=' + latlngCoords + '&key=' + apiKey;
 
     $.get(geocodeUrl, function (locationData) {
         console.log(locationData.results[0]);
