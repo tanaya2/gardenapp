@@ -2,7 +2,7 @@
 
 Tanaya Allen | 3175225
 
-Website Link: https://tanaya2.github.io/gardenapp/
+Website Link: https://tanaya2.github.io/gardenapp/.
 
 
 ## Website Purpose
