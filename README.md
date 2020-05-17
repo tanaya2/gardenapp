@@ -256,5 +256,6 @@ This website requires an API that seemingly does not exist. Future development m
 
 ## Group Project
 For the group project I was selected to oversee the content and troubleshooting. Being in charge of the final task before the website was complete meant that throughout the project I followed along with the website progress. Once everyone’s website was complete, I added in the URLs, chosen image, author information and a short description to each placeholder. The placeholders were set out by the individuals in charge of CSS and HTML. In terms of troubleshooting, there weren’t too many issues with the site. I had to add in a src function in order to link the URLs to the images, however, the rest was straight forward.
+
 Communication in the group was difficult as we were using several online platforms, including Trello, UC Learn and GitHub. I found it difficult to keep up with the conversation at particular points and made an effort to be more proactive with this as the project went on. Overall, I think the website we created is simple and effective at communicating the necessary information.
 
