@@ -8,8 +8,7 @@ The purpose of this project was to create a website that allowed users to instan
 ## Workflow
 Various APIs were utilised to create an app that sensed a user’s location and time to determine which month of the year they are in, and as a result, which season it is. Once the season had been determined, a wiki API was used to fetch data relating to vegetable plants that can grow during the determined season. The website was expected to work as the workflow below shows:
 
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)
+![Workflow](/images/workflow.jpg)
 
 This workflow presented several issues, most notably the issue of the APIs not returning the necessary data. As a result, comprises had to be made to ensure the website was still functioning and severed the purpose outlined in the above statement. Aesthetic features linked to APIs also did not work, meaning that the physical website did not look visually appealing as the initial design had set out to achieve.
 
@@ -34,15 +33,15 @@ OPEN CAGE API IMAGE
 ### Homepage Design
 The overall aim of the website design was to create a page that was clean and appealing. The original design had several visual elements in the form of images that aimed to give the website character. A search function was compromised of an interactive shovel image in the top right corner, the returned data was showcased in a pot plant, and the site name was shown clearly in the top left corner. The original homepage design did not contain navigation to other pages, however, this is something that required implementation. The original design idea can be seen below.
 
-ORIGINAL DESIGN IMAGE
+![Home Page Design Sketch](/images/homepagedesignsketch.jpg)
 
 This design was refined to create a more contemporary look by utilising the background as a symbol for soil and sky, as opposed to ‘planting’ the returned plants in a pot. This could either be done by still using plant symbols to ‘grow’ on the website, or by appending the returned content in a way that still had the design features but was a simplistic take.
 
-BACKGROUND DESIGN IMAGE
+![Background Design Sketch](/images/backgroundoptionssketch.jpg)
 
 The below screenshot reveals a mock-up of the website using Design #1. Although the images were not expected to be the final solution, this mockup shows the capacity for the design.
 
-MOCKUP WEBSITE IMAGE
+![Mockup Design](/images/screencapture-file-C-Users-Tanaya-OneDrive-uni-2020-1-2020-1-designing-for-data-informed-user-experience-gardenapp-tanaya2-github-io-index-html-2020-05-10-13_11_10.jpg)
 
 As work on the website continued it was discovered that appending images as a representation for the returned plants was quite difficult. Initially, the images were due to be of the vegetable plants, however, this content does not exist in a uniformed style. From here I decided to adapt and append the data in the form of images of the vegetable, as these images could be sourced in a uniformed manner from The Noun Project. After downloading images as icons in both png and SVG formats I attempted to append the images to the home page using a function to return icons based on the returned data. This can be seen below.
 
@@ -51,23 +50,23 @@ ICON WORK IMAGE
 After several different attempts, it was determined that this would not work either. As seen in the workflow, it was questioned whether this function, or if statements, could be utilised to also return .html URL for the vegetable pages. I did attempt this several times as well with no luck. I was also going to attempt to link the URL to the icon image if this could have been returned successfully.
 As a result of this, the final page looked very simple and did not contain any vegetable images or links. It did, however, have built-in navigation that allows the user to navigate the different pages of the site and it is expected that the data returned on the home page will help guide the user and therefore solve the design problem outlined in the website purpose.
 
-FINAL WEBSITE IMAGE
+![Final Home Page Design](/images/screencapture-file-C-Users-Tanaya-OneDrive-uni-2020-1-2020-1-designing-for-data-informed-user-experience-gardenapp-tanaya2-github-io-index-html-2020-05-17-10_00_54.jpg)
 
 ### Individual Pages Design
 The website contains various individual pages for each vegetable. These pages break each vegetable plant down and provide information about the plant. It was expected that the APIs would return this data, however, they did not return the majority of the data in a useable format. As the APIs were not able to be used to their intended full capacity, data was taken from the APIs information presented in the console to populate these pages. Some information was also required to be researched externally.
 The original design for this page was simple, with an image and brief overview of the plant. This design was closely adhered to in the final product, with the addition of background colours to add style to the page. These colours are also seen on the homepage in a horizontal format to link the website together but clearly show information on each page.
 
-PAGE DESIGN IMAGE
+![Individual Page Sketch](/images/individualpagesketch.jpg)
 PAGE DESIGN CODE IMAGE FOR BACKGROUND
 
 The final design for each page uses images from The Noun Project, images that would have been used for the homepage, to visually represent the vegetable plant in a uniformed way. The Wiki API did return some images that may have been able to be used, however, these were of different formats and aesthetics. Some returns did not have images at all.
 
-FINAL DESIGN IMAGE WEBSITE PAGE
+![Final Individual Page Design](/images/individualpagewebsite.jpg)
 
 ### Navigation
 The navigation of this website is hidden, accessibly by the three small lines in the top left corner next to the site name. When clicked, the navigation panel opens by animation as it slides across the screen, from here each page is shown and accessible. Once a user has finished with the navigation the screen can be closed by pressing the ‘X’ in the top right corner. This navigation was design to be clear, concise and visually appealing. The colour scheme is dark with bright text, matching the rest of the website.
 
-NAVIGATION IMAGE
+![Navigation](/images/screencapture-file-C-Users-Tanaya-OneDrive-uni-2020-1-2020-1-designing-for-data-informed-user-experience-gardenapp-tanaya2-github-io-index-html-2020-05-17-10_26_02.jpg)
  
 If the website were to contain more information there is potential to group pages together, perhaps by the season of growth, to minimise the navigation list.
 
