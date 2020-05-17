@@ -140,7 +140,7 @@ function getPlants(season) {
         var container = $('<div>');
 
         //search request from wikipedia
-        var wikiURL = "https://en.wikipedia.org/w/api.php?action=query&list=search&srprop&srsearch=" + singlePlant + "&prop=extracts&format=json" + "&origin=*";
+        var wikiURL = "http://en.wikipedia.org/w/api.php?action=query&list=search&srprop&srsearch=" + singlePlant + "&prop=extracts&format=json" + "&origin=*";
 
         //this gets a list of search results from wikipedia
         $.getJSON(wikiURL, function (wikiData) {
@@ -194,7 +194,7 @@ function getPlants(season) {
 function getLocationName(latlngCoords) {
 
     var apiKey = 'c89f5a299176437ea002fecc8d8b544b';
-    var geocodeUrl = 'https://api.opencagedata.com/geocode/v1/json?q=' + latlngCoords + '&key=' + apiKey;
+    var geocodeUrl = 'http://api.opencagedata.com/geocode/v1/json?q=' + latlngCoords + '&key=' + apiKey;
 
     $.get(geocodeUrl, function (locationData) {
         console.log(locationData.results[0]);
