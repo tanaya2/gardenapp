@@ -1,7 +1,7 @@
 # Production Journal - Orto
 
-Tanaya Allen – 3175225
-Website Link: 
+Tanaya Allen | 3175225
+Website Link: https://tanaya2.github.io/gardenapp/
 
 
 ## Website Purpose
@@ -124,6 +124,7 @@ function getPlants(season) {
 
 
 ## Website Design Breakdown
+
 ### Homepage Design
 The overall aim of the website design was to create a page that was clean and appealing. The original design had several visual elements in the form of images that aimed to give the website character. A search function was compromised of an interactive shovel image in the top right corner, the returned data was showcased in a pot plant, and the site name was shown clearly in the top left corner. The original homepage design did not contain navigation to other pages, however, this is something that required implementation. The original design idea can be seen below.
 
@@ -247,6 +248,7 @@ The navigation of this website is hidden, accessibly by the three small lines in
 ![Navigation](/images/navigation.png)
  
 If the website were to contain more information there is potential to group pages together, perhaps by the season of growth, to minimise the navigation list.
+
 
 ## Future Considerations
 This website requires an API that seemingly does not exist. Future development may include using API data from different sources and hardcoded data to provide users with an experience that completely fulfils the design problem. For example, a weather app, such as the Dark Sky API, may be used to retrieve data about an individual’s weather based on their location. This would provide information that is highly personalised as it would reflect what vegetables could be grown based on the upcoming weather in a user’s location, rather than a general season. Limited amounts of plant data may be able to be appended to the individual vegetable pages using the Trefle API, Atlas of Living Australia API and the Wiki API. This would ensure that data is up to date and would remove the need to write information directly into the code. Overall, the website has potential but I believe requires a different approach to unlock this potential.
