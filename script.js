@@ -140,7 +140,7 @@ function getPlants(season) {
         var container = $('<div>');
 
         //search request from wikipedia
-        var wikiURL = "http://en.wikipedia.org/w/api.php?action=query&list=search&srprop&srsearch=" + singlePlant + ;
+        var wikiURL = "http://en.wikipedia.org/w/api.php?action=query&list=search&srprop&srsearch=" + singlePlant + "&prop=extracts&format=json" + "&origin=*";
 
         //this gets a list of search results from wikipedia
         $.getJSON(wikiURL, function (wikiData) {
