@@ -4,6 +4,8 @@ Tanaya Allen | 3175225
 
 Website Link: https://tanaya2.github.io/gardenapp/.
 
+Group Website Link: https://smamone.github.io/11060-interactive-project/
+
 
 ## Website Purpose
 The purpose of this project was to create a website that allowed users to instantly see what vegetable plants they should plant based on their current weather. After researching online there appeared to be no website that served this exact application, this is one of the reasons why I decided to create this site. Another reason was because my household recently planted a few different vegetables, most of which are now struggling to grow due to the weather. This app aims to provide an accessible place for users to see what vegetables are appropriate for their location, and provide information regarding different types of vegetable so that individuals can make informed decisions when it comes to their gardening. 
