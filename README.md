@@ -5,6 +5,7 @@ Tanaya Allen | 3175225
 Website Link: https://tanaya2.github.io/gardenapp/.
 
 Group Website Link: https://smamone.github.io/11060-interactive-project/
+Group Website GitHub Repository: https://github.com/smamone/11060-interactive-project
 
 
 ## Website Purpose
