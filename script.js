@@ -212,7 +212,7 @@ function getLocationName(latlngCoords) {
 
 };  //close getJSON
 
-/*attempt tp get icon images for plant title data
+/*attempt to get icon images for plant title data
 function to run in order to return icon image
 function returnIcon(icon) {
 
